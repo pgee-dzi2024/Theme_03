@@ -1,27 +1,27 @@
 from django.shortcuts import render,redirect,reverse
-from . import forms,models
-from django.http import HttpResponseRedirect,HttpResponse
+from . import forms, models
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import send_mail
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib import messages
 from django.conf import settings
 
+
 def home_view(request):
     products=models.Product.objects.all()
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
-        counter=product_ids.split('|')
-        product_count_in_cart=len(set(counter))
+        counter = product_ids.split('|')
+        product_count_in_cart = len(set(counter))
     else:
         product_count_in_cart=0
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
-    return render(request,'ecom/index.html',{'products':products,'product_count_in_cart':product_count_in_cart})
-    
+    return render(request,'ecom/index.html', {'products': products, 'product_count_in_cart': product_count_in_cart})
 
 
-#for showing login button for admin(by sumit)
+# for showing login button for admin(by sumit)
 def adminclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
@@ -29,12 +29,12 @@ def adminclick_view(request):
 
 
 def customer_signup_view(request):
-    userForm=forms.CustomerUserForm()
-    customerForm=forms.CustomerForm()
+    userForm = forms.CustomerUserForm()
+    customerForm = forms.CustomerForm()
     mydict={'userForm':userForm,'customerForm':customerForm}
     if request.method=='POST':
         userForm=forms.CustomerUserForm(request.POST)
-        customerForm=forms.CustomerForm(request.POST,request.FILES)
+        customerForm=forms.CustomerForm(request.POST, request.FILES)
         if userForm.is_valid() and customerForm.is_valid():
             user=userForm.save()
             user.set_password(user.password)
@@ -47,7 +47,8 @@ def customer_signup_view(request):
         return HttpResponseRedirect('customerlogin')
     return render(request,'ecom/customersignup.html',context=mydict)
 
-#-----------for checking user iscustomer
+
+# -----------for checking user is customer
 def is_customer(user):
     return user.groups.filter(name='CUSTOMER').exists()
 
@@ -200,10 +201,9 @@ def view_feedback_view(request):
     return render(request,'ecom/view_feedback.html',{'feedbacks':feedbacks})
 
 
-
-#---------------------------------------------------------------------------------
-#------------------------ PUBLIC CUSTOMER RELATED VIEWS START ---------------------
-#---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# ------------------------ PUBLIC CUSTOMER RELATED VIEWS START ---------------------
+# ---------------------------------------------------------------------------------
 def search_view(request):
     # whatever user write in search box we get in query
     query = request.GET['query']
@@ -272,7 +272,7 @@ def cart_view(request):
         product_ids = request.COOKIES['product_ids']
         if product_ids != "":
             product_id_in_cart=product_ids.split('|')
-            products=models.Product.objects.all().filter(id__in = product_id_in_cart)
+            products=models.Product.objects.all().filter(id__in=product_id_in_cart)
 
             #for total price shown in cart
             for p in products:
@@ -290,14 +290,14 @@ def remove_from_cart_view(request,pk):
         product_count_in_cart=0
 
     # removing product id from cookie
-    total=0
+    total = 0
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
         product_id_in_cart=product_ids.split('|')
         product_id_in_cart=list(set(product_id_in_cart))
         product_id_in_cart.remove(str(pk))
-        products=models.Product.objects.all().filter(id__in = product_id_in_cart)
-        #for total price shown in cart after removing product
+        products = models.Product.objects.all().filter(id__in = product_id_in_cart)
+        # for total price shown in cart after removing product
         for p in products:
             total=total+p.price
 
@@ -328,6 +328,7 @@ def send_feedback_view(request):
 #---------------------------------------------------------------------------------
 #------------------------ CUSTOMER RELATED VIEWS START ------------------------------
 #---------------------------------------------------------------------------------
+
 @login_required(login_url='customerlogin')
 @user_passes_test(is_customer)
 def customer_home_view(request):
