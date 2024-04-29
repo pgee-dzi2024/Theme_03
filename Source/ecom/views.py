@@ -45,7 +45,7 @@ def customer_signup_view(request):
             my_customer_group = Group.objects.get_or_create(name='CUSTOMER')
             my_customer_group[0].user_set.add(user)
         return HttpResponseRedirect('customerlogin')
-    return render(request,'ecom/customersignup.html',context=mydict)
+    return render(request,'ecom/customer_signup.html',context=mydict)
 
 
 # -----------for checking user is customer
@@ -544,7 +544,7 @@ def edit_profile_view(request):
 #------------------------ ABOUT US AND CONTACT US VIEWS START --------------------
 #---------------------------------------------------------------------------------
 def aboutus_view(request):
-    return render(request,'ecom/aboutus.html')
+    return render(request,'ecom/about_us.html')
 
 def contactus_view(request):
     sub = forms.ContactusForm()
@@ -555,5 +555,5 @@ def contactus_view(request):
             name=sub.cleaned_data['Name']
             message = sub.cleaned_data['Message']
             send_mail(str(name)+' || '+str(email),message, settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently = False)
-            return render(request, 'ecom/contactussuccess.html')
-    return render(request, 'ecom/contactus.html', {'form':sub})
+            return render(request, 'ecom/contact_us_success.html')
+    return render(request, 'ecom/contact_us.html', {'form':sub})

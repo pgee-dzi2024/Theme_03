@@ -32,7 +32,7 @@ urlpatterns = [
 
 
     path('customersignup', views.customer_signup_view),
-    path('customerlogin', LoginView.as_view(template_name='ecom/customerlogin.html'),name='customerlogin'),
+    path('customerlogin', LoginView.as_view(template_name='ecom/customer_login.html'),name='customerlogin'),
     path('customer-home', views.customer_home_view,name='customer-home'),
     path('my-order', views.my_order_view,name='my-order'),
     # path('my-order', views.my_order_view2,name='my-order'),

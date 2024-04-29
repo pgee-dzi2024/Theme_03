@@ -5,9 +5,9 @@
 
 
   {%if request.user.is_authenticated%}
-    {% include "ecom/customer_navbar.html" %}
+    {% include "main/customer_navbar.html" %}
   {%else%}
-    {% include "ecom/navbar.html" %}
+    {% include "main/navbar.html" %}
   {%endif%}
 <br><br><br>
 <h3 style="color:blue;text-align:center;">Your Feedback Sent Succesfully !</h3>
@@ -17,7 +17,7 @@
 </div>
 
 <br><br><br><br><br><br><br><br>
-  {% include "ecom/footer.html" %}
+  {% include "main/footer.html" %}
 
 <!--
 developed By : sumit kumar
