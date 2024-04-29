@@ -38,17 +38,17 @@ def admin_click_view(request):
 
 def customer_signup_view(request):
     print('customer_signup_view')
-    userForm = forms.CustomerUserForm()
-    customerForm = forms.CustomerForm()
-    mydict = {'userForm': userForm, 'customerForm': customerForm}
+    user_form = forms.CustomerUserForm()
+    customer_form = forms.CustomerForm()
+    mydict = {'userForm': user_form, 'customerForm': customer_form}
     if request.method == 'POST':
-        userForm = forms.CustomerUserForm(request.POST)
-        customerForm = forms.CustomerForm(request.POST, request.FILES)
-        if userForm.is_valid() and customerForm.is_valid():
-            user = userForm.save()
+        user_form = forms.CustomerUserForm(request.POST)
+        customer_form = forms.CustomerForm(request.POST, request.FILES)
+        if user_form.is_valid() and customer_form.is_valid():
+            user = user_form.save()
             user.set_password(user.password)
             user.save()
-            customer = customerForm.save(commit=False)
+            customer = customer_form.save(commit=False)
             customer.user = user
             customer.save()
             my_customer_group = Group.objects.get_or_create(name='CUSTOMER')
@@ -78,9 +78,9 @@ def after_login_view(request):
 def admin_dashboard_view(request):
     print('admin_dashboard_view')
     # for cards on dashboard
-    customercount = models.Customer.objects.all().count()
-    productcount = models.Product.objects.all().count()
-    ordercount = models.Orders.objects.all().count()
+    customer_count = models.Customer.objects.all().count()
+    product_count = models.Product.objects.all().count()
+    order_count = models.Orders.objects.all().count()
 
     # for recent order tables
     orders = models.Orders.objects.all()
@@ -93,9 +93,9 @@ def admin_dashboard_view(request):
         ordered_bys.append(ordered_by)
 
     mydict = {
-        'customercount': customercount,
-        'productcount': productcount,
-        'ordercount': ordercount,
+        'customercount': customer_count,
+        'productcount': product_count,
+        'ordercount': order_count,
         'data': zip(ordered_products, ordered_bys, orders),
     }
     return render(request, 'main/admin_dashboard.html', context=mydict)
@@ -514,7 +514,7 @@ def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
     html = template.render(context_dict)
     result = io.BytesIO()
-    pdf = pisa.pisaDocument(io.BytesIO(html.encode("ISO-8859-1")), result)
+    pdf = pisa.pisaDocument(io.BytesIO(html.encode("ISO-8951-1")), result)
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return
