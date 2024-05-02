@@ -1,4 +1,4 @@
-{% extends 'main/customer_base.html' %}
+{% extends 'main/homebase.html' %}
 {% load static %}
 {% load widget_tweaks %}
 {% block content %}
@@ -88,34 +88,45 @@ select{
 	color:red;
 }
 </style>
+<div class="margin-top-200 margin-bottom-200">
 {%if product_in_cart%}
 <form method="post">
   {% csrf_token %}
 <ul class="form-style-1">
     <li>
-        <label>Email <span class="required">*</span></label>
-        {% render_field addressForm.Email class="field-long" placeholder="Email" %}
-
-    </li>
-    <li>
-        <label>Mobile <span class="required">*</span></label>
-        {% render_field addressForm.Mobile class="field-long" placeholder="Mobile" %}
+        <label>e-mail <span class="required">*</span></label>
+        {% render_field addressForm.Email class="field-long" placeholder="e-mail" %}
     </li>
 
     <li>
-        <label>Shipment Address <span class="required">*</span></label>
-        {% render_field addressForm.Address id="field5" class="field-long field-textarea" placeholder="Building Number,city, pin" %}
-
+        <label>Телефон <span class="required">*</span></label>
+        {% render_field addressForm.Mobile class="field-long" placeholder="телефон за контакт" %}
     </li>
+
     <li>
-        <input type="submit" value="Proceed To Pay" />
+        <label>Адрес за доставка <span class="required">*</span></label>
+        {% render_field addressForm.Address id="field5" class="field-long field-textarea" placeholder="адрес за доставка" %}
+    </li>
+
+    <li>
+        <input type="submit" value="Плащане" />
     </li>
 </ul>
 </form>
 {%else%}
 <br><br>
-<h1 style="text-align:center; color:red;"> First Add Product In Cart </h1>
+<h1 style="text-align:center; color:red;"> Първо добавете стоки в количката </h1>
 <br><br><br><br><br><br><br><br><br><br>
 {%endif%}
-
+</div>
 {% endblock content %}
+
+            {%  block payments %}
+            <ul class="list-unstyled list-inline pull-right">
+              <li><img src="{% static 'assets/corporate/img/payments/western-union.jpg' %}" alt="We accept Western Union" title="We accept Western Union"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/american-express.jpg' %}" alt="We accept American Express" title="We accept American Express"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/MasterCard.jpg' %}" alt="We accept MasterCard" title="We accept MasterCard"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/PayPal.jpg' %}" alt="We accept PayPal" title="We accept PayPal"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/visa.jpg' %}" alt="We accept Visa" title="We accept Visa"></li>
+            </ul>
+            {% endblock %}

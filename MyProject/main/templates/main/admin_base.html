@@ -1,138 +1,130 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
+<!-- Head BEGIN -->
 <head>
-  <title>Admin Panel - Ecommerce</title>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>SUPERSHOP АДМИНИСТРАТОР</title>
 
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <style type="text/css">
-    .bs-example {
-      margin: 0px;
+  <link rel="shortcut icon" href="favicon.ico">
 
-    }
+  <!-- Fonts START -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet"
+        type="text/css"><!--- fonts for slider on the index page -->
+  <!-- Fonts END -->
 
-    .navbar-brand {
-      font-size: 20px;
-      font-family: sans-serif;
+  <!-- Global styles START -->
+  <link href="{% static 'assets/plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Global styles END -->
 
-    }
+  <!-- Page level plugin styles START -->
+  <link href="{% static 'assets/pages/css/animate.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/plugins/fancybox/source/jquery.fancybox.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/plugins/owl.carousel/assets/owl.carousel.css' %}" rel="stylesheet">
+  <!-- Page level plugin styles END -->
 
-        /*---------------------------------------
-           Social section
-        -----------------------------------------*/
-        footer {
-          padding: 0px 0px 0px 0px;
-          background-color: black;
-          margin: 0px;
-        }
-
-
-        #ftr {
-
-          padding: 20px;
-        }
-
-        .fa {
-
-          font-size: 23px;
-          width: 60px;
-          text-align: center;
-          text-decoration: none;
-          margin: 5px 2px;
-          border-radius: 50%;
-        }
-
-        .fa:hover {
-          opacity: 0.5;
-          text-decoration: none;
-        }
-
-        .fa-facebook {
-          background: #3B5998;
-          color: white;
-          margin-top: 30px;
-        }
-
-        .fa-whatsapp {
-          background: #25d366;
-          color: white;
-        }
-
-        .fa-twitter {
-          background: #55ACEE;
-          color: white;
-        }
-
-        .fa-instagram {
-          background: #125688;
-          color: white;
-        }
-
-        p {
-          text-align: center;
-
-        }
-  </style>
+  <!-- Theme styles START -->
+  <link href="{% static 'assets/pages/css/components.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/pages/css/slider.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/pages/css/style-shop.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'assets/corporate/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/corporate/css/style-responsive.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/corporate/css/themes/red.css' %}" rel="stylesheet" id="style-color">
+  <link href="{% static 'assets/corporate/css/custom.css' %}" rel="stylesheet">
+  <!-- Theme styles END -->
 </head>
+<!-- Head END -->
 
-<body>
-
-
-
-  <div class="bs-example">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background:#343A40;">
-      <a href="/" class="navbar-brand">Admin Panel</a>
-      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-        <div class="navbar-nav">
-          <a href="/view-customer" class="nav-item nav-link">Customer</a>
-          <a href="/admin-view-booking" class="nav-item nav-link">View Orders</a>
-          <a href="/admin-products" class="nav-item nav-link">Manage Products</a>
-          <!-- <a href="/view-feedback" class="nav-item nav-link">Feedback</a> -->
+<!-- Body BEGIN -->
+<body class="ecommerce">
+    <!-- НАЧАЛО ГОРНО МЕНЮ -->
+    <div class="pre-header">
+        <div class="container">
+            <div class="row">
+                <!-- НАЧАЛО ГОРНО МЕНЮ ЛЯВА ЧАСТ -->
+                <div class="col-md-6 col-sm-6 additional-shop-info">
+                    <ul class="list-unstyled list-inline pull-left">
+                        <li><a href="/view-customer">Клиенти</a></li>
+                        <li><a href="/admin-view-booking">Поръчки</a></li>
+                        <li><a href="/admin-products">Стоки</a></li>
+                    </ul>
+                </div>
+                <!-- КРАЙ ГОРНО МЕНЮ ЛЯВА ЧАСТ -->
+                <!-- НАЧАЛО ГОРНО МЕНЮ ДЯСНА ЧАСТ -->
+                <div class="col-md-6 col-sm-6 additional-nav">
+                    <ul class="list-unstyled list-inline pull-right">
+                        <li><a href="/logout">Изход  от профила</a></li>
+                    </ul>
+                </div>
+                <!-- КРАЙ ГОРНО МЕНЮ ДЯСНА ЧАСТ -->
+            </div>
         </div>
+    </div>
+    <!-- КРАЙ ГОРНО МЕНЮ -->
 
-        <div class="navbar-nav navbar-right">
-          <a href="/logout" class="nav-item nav-link"> Logout</a>
-        </div>
+<!-- НАЧАЛО БЛОК ОСНОВНО СЪДЪРЖАНИЕ НА СТРАНИЦАТА -->
+{% block content %}
 
-      </div>
-    </nav>
-  </div>
+{% endblock content %}
+<!-- КРАЙ БЛОК ОСНОВНО СЪДЪРЖАНИЕ НА СТРАНИЦАТА -->
 
-  <!-- content start-->
-  {% block content %}
-
-  {% endblock content %}
-  <!-- content end-->
-<br><br><br><br><br><br><br><br>
-  <!-- <footer>
-    <p>
-      <a id="ftr" href="#" class="fa fa-facebook"></a>
-      <a id="ftr" href="#" class="fa fa-whatsapp"></a>
-      <a id="ftr" href="#" class="fa fa-instagram"></a>
-      <a id="ftr" href="#" class="fa fa-twitter"></a>
-    </p>
-
-    <br>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-sm-12">
-          <div style="color:#ffffff;" class="wow fadeInUp footer-copyright">
-            <p>
-              Copyright &copy; 2022 Developed by Sumit Kumar </p>
+    <!-- НАЧАЛО FOOTER -->
+    <div class="footer padding-top-15 footer-light">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-4 col-sm-4 padding-top-10">
+            2024 © Банско. Всички права запзаени.
           </div>
+          <!-- END COPYRIGHT -->
+
+          <!-- BEGIN PAYMENTS -->
+          <div class="col-md-4 col-sm-4">
+          </div>
+          <!-- END PAYMENTS -->
+
+          <!-- BEGIN POWERED -->
+          <div class="col-md-4 col-sm-4 text-right">
+            <p class="powered">Дипломна работа на Айсел Фейзи</p>
+          </div>
+          <!-- END POWERED -->
         </div>
       </div>
     </div>
-  </footer> -->
-  <!--
-  developed By : sumit kumar
-  -->
+    <!-- КРАЙ FOOTER -->
+
+
+    <!-- НАЧАЛО СРИПТОВЕ, НЕОБХОДИМИ ЗА ВСИЧКИ СТРАНИЦИ -->
+
+    <script src="{% static 'assets/plugins/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/plugins/jquery-migrate.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/corporate/scripts/back-to-top.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
+
+    <script src="{% static 'assets/plugins/fancybox/source/jquery.fancybox.pack.js' %}" type="text/javascript"></script><!-- pop up -->
+    <script src="{% static 'assets/plugins/owl.carousel/owl.carousel.min.js' %}" type="text/javascript"></script><!-- slider for products -->
+    <script src="{% static 'assets/plugins/zoom/jquery.zoom.min.js' %}" type="text/javascript"></script><!-- product zoom -->
+    <script src="{% static 'assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js' %}" type="text/javascript"></script><!-- Quantity -->
+
+    <script src="{% static 'assets/corporate/scripts/layout.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/pages/scripts/bs-carousel.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Layout.init();
+            Layout.initOWL();
+            Layout.initImageZoom();
+            Layout.initTouchspin();
+            Layout.initTwitter();
+        });
+    </script>
 </body>
 </html>
+

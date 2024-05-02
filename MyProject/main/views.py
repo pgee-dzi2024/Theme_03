@@ -12,6 +12,9 @@ from django.conf import settings
 def home_view(request):
     print('home_view')
     products = models.Product.objects.all()
+    products_new = models.Product.objects.filter(is_new=True)
+    products_sale = models.Product.objects.filter(for_sale=True)
+
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
         counter = product_ids.split('|')
@@ -22,6 +25,8 @@ def home_view(request):
         return HttpResponseRedirect('after_login')
 
     context = {'products': products,
+               'products_new': products_new,
+               'products_sale': products_sale,
                'product_count_in_cart': product_count_in_cart,
                }
 
@@ -40,7 +45,12 @@ def customer_signup_view(request):
     print('customer_signup_view')
     user_form = forms.CustomerUserForm()
     customer_form = forms.CustomerForm()
-    mydict = {'userForm': user_form, 'customerForm': customer_form}
+    mydict = {
+        'userForm': user_form,
+        'customerForm': customer_form,
+        'form_title': 'Вход за потребители',
+    }
+
     if request.method == 'POST':
         user_form = forms.CustomerUserForm(request.POST)
         customer_form = forms.CustomerForm(request.POST, request.FILES)
@@ -244,9 +254,10 @@ def search_view(request):
     # word variable will be shown in html when user click on search button
     word = "Searched Result :"
 
-    if request.user.is_authenticated:
-        return render(request, 'main/customer_home.html',
-                      {'products': products, 'word': word, 'product_count_in_cart': product_count_in_cart})
+#    if request.user.is_authenticated:
+#        return render(request, 'main/customer_home.html',
+#                      {'products': products, 'word': word, 'product_count_in_cart': product_count_in_cart})
+
     return render(request, 'main/index.html',
                   {'products': products, 'word': word, 'product_count_in_cart': product_count_in_cart})
 
@@ -255,19 +266,25 @@ def search_view(request):
 def add_to_cart_view(request, pk):
     print('add_to_cart_view')
     products = models.Product.objects.all()
+    products_new = models.Product.objects.filter(is_new=True)
+    products_sale = models.Product.objects.filter(for_sale=True)
 
-    # for cart counter, fetching products ids added by customer from cookies
+    # за брояча на избраните продукти, изваждам всички id, добавени от клиента, от cookies
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
         counter = product_ids.split('|')
         product_count_in_cart = len(set(counter))
     else:
         product_count_in_cart = 1
+    context = {
+        'products': products,
+        'products_new': products_new,
+        'products_sale': products_sale,
+        'product_count_in_cart': product_count_in_cart,
+        }
+    response = render(request, 'main/index.html', context)
 
-    response = render(request, 'main/index.html',
-                      {'products': products, 'product_count_in_cart': product_count_in_cart})
-
-    # adding product id to cookies
+    # добавяне на артикул към cookies
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
         if product_ids == "":
@@ -306,6 +323,7 @@ def cart_view(request):
 
             # for total price shown in cart
             for p in products:
+                print(p.name)
                 total = total + p.price
     return render(request, 'main/cart.html',
                   {'products': products, 'total': total, 'product_count_in_cart': product_count_in_cart})
@@ -375,12 +393,14 @@ def customer_home_view(request):
         product_count_in_cart = len(set(counter))
     else:
         product_count_in_cart = 0
-    return render(request, 'main/customer_home.html',
+    return render(request, 'main/index.html',
                   {'products': products, 'product_count_in_cart': product_count_in_cart})
+#    return render(request, 'main/customer_home.html',
+#                  {'products': products, 'product_count_in_cart': product_count_in_cart})
 
 
 # shipment address before placing order
-@login_required(login_url='customer_login')
+@login_required(login_url='/customer_login')
 def customer_address_view(request):
     print('customer_address_view')
     # this is for checking whether product is present in cart or not
@@ -401,6 +421,7 @@ def customer_address_view(request):
     addressForm = forms.AddressForm()
     if request.method == 'POST':
         addressForm = forms.AddressForm(request.POST)
+        print('customer_address_view POST')
         if addressForm.is_valid():
             # here we are taking address, email, mobile at time of order placement
             # we are not taking it from customer account table because
@@ -408,7 +429,9 @@ def customer_address_view(request):
             email = addressForm.cleaned_data['Email']
             mobile = addressForm.cleaned_data['Mobile']
             address = addressForm.cleaned_data['Address']
-            # for showing total price on payment page.....accessing id from cookies then fetching  price of product from db
+            print('customer_address_view', email, mobile, address)
+            # for showing total price on payment page.....accessing id from cookies
+            # then fetching  price of product from db
             total = 0
             if 'product_ids' in request.COOKIES:
                 product_ids = request.COOKIES['product_ids']
@@ -423,6 +446,8 @@ def customer_address_view(request):
             response.set_cookie('mobile', mobile)
             response.set_cookie('address', address)
             return response
+        else:
+            print(addressForm.errors)
     return render(request, 'main/customer_address.html',
                   {'addressForm': addressForm, 'product_in_cart': product_in_cart,
                    'product_count_in_cart': product_count_in_cart})
@@ -433,8 +458,8 @@ def customer_address_view(request):
 @login_required(login_url='customer_login')
 def payment_success_view(request):
     print("payment_success_view")
-    # тука ще обработваме заявките след успешно плащане ще вземаме данните на потребителя, данните за всеки продуктов id
-    # от cookies и респективно съответните данни от БД, след което ще изтрием бисквитките, за щото след завършване на
+    # тука ще обработваме заявките. След успешно плащане ще вземаме данните на потребителя, данните за всеки продуктов id
+    # от cookies и респективно съответните данни от БД, след което ще изтрием бисквитките, защото след завършване на
     # поръчката количката трябва да е празна
 
     customer = models.Customer.objects.get(user_id=request.user.id)
@@ -458,10 +483,11 @@ def payment_success_view(request):
         address = request.COOKIES['address']
 
     # here we are placing number of orders as much there is a products
-    # suppose if we have 5 items in cart and we place order....so 5 rows will be created in orders table
-    # there will be lot of redundant data in orders table...but its become more complicated if we normalize it
+    # suppose if we have 5 items in cart, and we place order....so 5 rows will be created in orders table
+    # there will be a lot of redundant data in orders table...but its become more complicated if we normalize it
+
     for product in products:
-        models.Orders.objects.get_or_create(customer=customer, product=product, status='Pending', email=email,
+        models.Orders.objects.get_or_create(customer=customer, product=product, status='Нова', email=email,
                                             mobile=mobile, address=address)
 
     # after order placed cookies should be deleted

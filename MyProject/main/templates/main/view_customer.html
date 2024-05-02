@@ -29,22 +29,22 @@ facebook : fb.com/sumit.luv
 <div class="container">
   <div class="panel panel-danger">
     <div class="panel-heading">
-      <h6 class="panel-title">Total Customers</h6>
+      <h6 class="panel-title">Регистрирани клиенти</h6>
     </div>
     <table class="table table-hover table-bordered" id="dev-table">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Picture</th>
-          <th>Contact</th>
-          <th>Address</th>
-          <th>Actions</th>
+          <th>Име</th>
+          <th>Снимка</th>
+          <th>Телефон</th>
+          <th>Адрес</th>
+          <th>Действия</th>
         </tr>
       </thead>
       {% for c in customers %}
       <tr>
         <td> {{c.get_name}}</td>
-        <td> <img src="{% static c.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td> <img src="{{ c.profile_pic.url }}" alt="Profile Pic" height="40px" width="40px" /></td>
         <td>{{c.mobile}}</td>
         <td>{{c.address}}</td>
         <td><a class="btn btn-primary btn-xs" href="{% url 'update-customer' c.id  %}"><span class="glyphicon glyphicon-edit"></span></a>

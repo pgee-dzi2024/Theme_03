@@ -1,57 +1,49 @@
 {% extends 'main/admin_base.html' %}
 {% load static %}
 {% block content %}
-<br>
+
 {%include 'main/admin_dashboard_cards.html'%}
-<br><br><br><br><br>
 
-<hr><hr>
-<div class="container" >
+    <div class="col-md-12 col-sm-12 padding-top-60 margin-bottom-200">
+            <h1>Последни поръчки</h1>
+            <div class="goods-page">
+              <div class="goods-data clearfix">
+                <div class="table-wrapper-responsive">
+                <table summary="Shopping cart">
+                  <tr>
+                    <th class="goods-page-description">Клиент</th>
+                    <th class="goods-page-description">Телефон</th>
+                    <th class="goods-page-description">Адрес за доставка</th>
+                    <th class="goods-page-description">Артикул</th>
+                    <th class="goods-page-image">Снимка</th>
+                    <th class="goods-page-description">Статус</th>
+                  </tr>
+                  {% for product,customer,order in data %}
+                  <tr>
+                    {% for c in customer %}
+                    <td class="goods-page-description"> {{c.get_name}}</td>
+                    <td class="goods-page-description">{{c.mobile}}</td>
+                    <td class="goods-page-description">{{order.address}}</td>
+                    {% endfor %}
+                    {% for p in product %}
+                    <td class="goods-page-description"> {{p.name}}</td>
+                    <td class="goods-page-image"> <img src="{{ p.product_image.url }}" alt="Profile Pic"  width="40px" /></td>
 
-    <div class="panel panel-danger" >
-      <div class="panel-heading" style="text-align:center;">
-        <h6 class="panel-title">Recent Booking</h6>
-      </div>
-      <table class="table table-hover table-bordered" id="dev-table">
-        <thead>
-          <tr>
-            <th>Customer</th>
-            <th>Contact</th>
-            <th>Shipment Address</th>
-            <th>Product</th>
-            <th>Image</th>
-            <th>Status</th>
-
-          </tr>
-        </thead>
-        {% for product,customer,order in data %}
-        <tr>
-          {% for c in customer %}
-          <td> {{c.get_name}}</td>
-          <td>{{c.mobile}}</td>
-          <td>{{order.address}}</td>
-
-          {% endfor %}
-          {% for p in product %}
-          <td> {{p.name}}</td>
-          <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-
-          {% if order.status == 'Pending'%}
-          <td> <span class="label label-info">{{order.status}}</span></td>
-          {% elif order.status == 'Delivered' %}
-          <td> <span class="label label-success">{{order.status}}</span></td>
-          {% elif order.status == 'Out for Delivery' %}
-          <td> <span class="label label-warning">{{order.status}}</span></td>
-          {%else%}
-            <td> <span class="label label-primary">{{order.status}}</span></td>
-          {%endif%}
-          {% endfor %}
-        </tr>
-        {% endfor %}
-      </table>
-
-  </div>
-</div>
-
-
+                    {% if order.status == 'Pending'%}
+                    <td class="goods-page-description"> <span class="label label-info">{{order.status}}</span></td>
+                    {% elif order.status == 'Delivered' %}
+                    <td class="goods-page-description"> <span class="label label-success">{{order.status}}</span></td>
+                    {% elif order.status == 'Out for Delivery' %}
+                    <td class="goods-page-description"> <span class="label label-warning">{{order.status}}</span></td>
+                    {%else%}
+                    <td> <span class="label label-primary">{{order.status}}</span></td>
+                    {%endif%}
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </table>
+                </div>
+              </div>
+            </div>
+          </div>
 {% endblock content %}

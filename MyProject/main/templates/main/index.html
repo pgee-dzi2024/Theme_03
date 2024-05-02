@@ -2,480 +2,472 @@
 {% load static %}
 {% block content %}
 
-  <style media="screen">
-    body,
-html {
-  height: 100%;
-}
+    <!-- НАЧАЛО HEADER -->
+    <div class="header">
+      <div class="container">
+        <a class="site-logo" href="{% url 'home' %}"><img src="{% static 'assets/corporate/img/logos/logo-shop-red.png' %}"
+                                                         alt="SUPER SHOP"></a>
 
-.d-flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
+        <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
-.align-center {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
+        <!-- НАЧАЛО КОЛИЧКА -->
+        <div class="top-cart-block">
+          <div class="top-cart-info">
+            <a href="{% url 'cart' %}" class="top-cart-info-count">{{ product_count_in_cart }} бр.<i class="fa fa-shopping-cart"></i></a>
+          </div>
 
-.flex-centerY-centerX {
-  justify-content: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
 
-body {
-  background-color:#f7f7f7;
-}
+        </div>
+        <!--КРАЙ КОЛИЧКА -->
 
-.page-wrapper {
-  height: 100%;
-  display: table;
-}
+        <!-- НАЧАЛО МЕНЮ -->
+        <div class="header-navigation">
+          <ul>
+            <li><a href="shop-product-list.html">Дамско</a></li>
+            <li><a href="shop-product-list.html">Детско</a></li>
+            <li><a href="shop-product-list.html">Аксесоари</a></li>
+            <li><a href="shop-product-list.html">Спортни</a></li>
+            <li><a href="shop-product-list.html">Разпродажба</a></li>
+            <li><a href="shop-product-list.html">Нови</a></li>
 
-.page-wrapper .page-inner {
-  display: table-cell;
-  vertical-align: middle;
-}
 
-.el-wrapper {
-  width: 360px;
-  padding: 15px;
-  margin: 15px auto;
-  background-color: #fff;
-  border-radius: 15px;
-}
+            <li><a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes&amp;utm_source=download&amp;utm_medium=banner&amp;utm_campaign=metronic_frontКРАЙ_freebie" target="_blank">Admin theme</a></li>
 
-@media (max-width: 991px) {
-  .el-wrapper {
-    width: 345px;
-  }
-}
-
-@media (max-width: 767px) {
-  .el-wrapper {
-    width: 290px;
-    margin: 30px auto;
-  }
-}
-
-.el-wrapper:hover .h-bg {
-  left: 0px;
-}
-
-.el-wrapper:hover .price {
-  left: 20px;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  color: #f3f3f3;
-}
-
-.el-wrapper:hover .add-to-cart {
-  left: 50%;
-}
-
-.el-wrapper:hover .img {
-  webkit-filter: blur(7px);
-  -o-filter: blur(7px);
-  -ms-filter: blur(7px);
-  filter: blur(7px);
-  filter: progid:DXImageTransform.Microsoft.Blur(pixelradius='7', shadowopacity='0.0');
-  opacity: 0.4;
-}
-
-.el-wrapper:hover .info-inner {
-  bottom: 155px;
-}
-
-.el-wrapper:hover .a-size {
-  -webkit-transition-delay: 300ms;
-  -o-transition-delay: 300ms;
-  transition-delay: 300ms;
-  bottom: 50px;
-  opacity: 1;
-}
-
-.el-wrapper .box-down {
-  width: 100%;
-  height: 60px;
-  position: relative;
-  overflow: hidden;
-}
-
-.el-wrapper .box-up {
-  width: 100%;
-  height: 300px;
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-}
-
-.el-wrapper .img {
-  padding: 20px 0;
-  -webkit-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-}
-
-.h-bg {
-  -webkit-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  width: 660px;
-  height: 100%;
-  background-color: #3fcd7f;
-  position: absolute;
-  left: -659px;
-}
-
-.h-bg .h-bg-inner {
-  width: 50%;
-  height: 100%;
-  background-color: #464646;
-}
-
-.info-inner {
-  -webkit-transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  position: absolute;
-  width: 100%;
-  bottom: 10px;
-}
-
-.info-inner .p-name,
-.info-inner .p-company {
-  display: block;
-}
-
-.info-inner .p-name {
-  font-family: 'PT Sans', sans-serif;
-  font-size: 18px;
-  color: #252525;
-}
-
-.info-inner .p-company {
-  font-family: 'Lato', sans-serif;
-  font-size: 16px;
-  /* text-transform: uppercase; */
-  color: #fbfbfb;
-}
-
-.a-size {
-  -webkit-transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  position: absolute;
-  width: 100%;
-  bottom: -20px;
-  font-family: 'PT Sans', sans-serif;
-  color: #2b2b2b;
-  font-weight: 600;
-  opacity: 0;
-}
-
-.a-size .size {
-  color: #252525;
-}
-
-.cart {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  /* font-family: 'Lato', sans-serif; */
-  font-weight: 700;
-}
-
-.cart .price {
-  -webkit-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-delay: 100ms;
-  -o-transition-delay: 100ms;
-  transition-delay: 100ms;
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  font-size: 16px;
-  color: #252525;
-}
-
-.cart .add-to-cart {
-  -webkit-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-delay: 100ms;
-  -o-transition-delay: 100ms;
-  transition-delay: 100ms;
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 110%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.cart .add-to-cart .txt {
-  font-size: 12px;
-  color: #fff;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-* {
-  box-sizing: border-box;
-}
-
-/* Create three equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 10px;
-  height: 300px; /* Should be removed. Only for demonstration */
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-  }
-}
-
-/* html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: "Helvetica", sans-serif;
-} */
-
-img {
-  max-width: 100%;
-}
-
-.slider-container{
-  height: 35%;
-  width: 100%;
-  position: relative;
-  overflow: hidden; 
-  text-align: center;
-}
-
-.menu {
-  position: absolute;
-  left: 0;
-  z-index: 900;
-  width: 100%;
-  bottom: 0;
-}
-
-.menu label {
-  cursor: pointer;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background: #fff;
-  border-radius: 50px;
-  margin: 0 .2em 1em;
-  &:hover {
-    background: red;
-  }
-}
-
-.slide {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 100%;
-  z-index: 10;
-  padding: 8em 1em 0;
-  background-size: cover;
-  background-position: 50% 50%;
-  transition: left 0s .75s;
-}
-
-[id^="slide"]:checked + .slide {
-  left: 0;
-  z-index: 100;
-  transition: left .65s ease-out;
-}
-
-.slide-1 {
-  background-image: url("{% static 'images/ecom-banner1.jpg' %}");
-}
-.slide-2 {
-  background-image: url("{% static 'images/ecom-banner4.jpg' %}");
-}
-.slide-3 {
-  background-image: url("{% static 'images/ecom-banner1.png' %}");
-}
-.slide-4 {
-  background-image: url("{% static 'images/ecom-banner3.jpg' %}");
-}
-  </style>
-
-<div class="row">
-  <div class="col-md-12">
-    <div class="slider-container">
-      <div class="menu">
-        <label for="slide-dot-1"></label>
-        <label for="slide-dot-2"></label>
-        <label for="slide-dot-3"></label>
-        <label for="slide-dot-4"></label>
-      </div>
-      
-      <input id="slide-dot-1" type="radio" name="slides" checked>
-        <div class="slide slide-1"></div>
-      
-      <input id="slide-dot-2" type="radio" name="slides">
-        <div class="slide slide-2"></div>
-      
-      <input id="slide-dot-3" type="radio" name="slides">
-        <div class="slide slide-3"></div>
-      <input id="slide-dot-4" type="radio" name="slides">
-        <div class="slide slide-4"></div>
-    </div>
-  </div>
-</div>
-
-{%if products %}
-<h3 style="text-align:center; color:#3E454C;">{{word}}</h3>
-<br>
-
-<!-- products data start -->
-  <div class="row">
-
-      {% for p in products %}
-      <!-- card1 -->
-      <div class="column">
-      <div class="container page-wrapper" style="width: 450px;">
-        <div class="page-inner">
-          <div class="row">
-            <div class="el-wrapper">
-              <div class="box-up">
-                <img class="img" src="{% static p.product_image.url %}" alt="product pic" height="300px" width="300px">
-                <div class="img-info">
-                  <div class="info-inner">
-                    <span style="background-color:#3e454c; color:fbfbfb;"class="p-company">{{p.name}}</span>
-
+            <!-- НАЧАЛО TOP SEARCH -->
+            <li class="menu-search">
+              <span class="sep"></span>
+              <i class="fa fa-search search-btn"></i>
+              <div class="search-box">
+                <form action="#">
+                  <div class="input-group">
+                    <input type="text" placeholder="Search" class="form-control">
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="submit">Search</button>
+                    </span>
                   </div>
-                  <div class="a-size">{{p.description}}</div>
+                </form>
+              </div>
+            </li>
+            <!-- КРАЙ TOP SEARCH -->
+          </ul>
+        </div>
+        <!-- КРАЙ МЕНЮ -->
+      </div>
+    </div>
+    <!-- Header КРАЙ -->
+
+    <!-- НАЧАЛО SLIDER -->
+    <div class="page-slider margin-bottom-35">
+        <div id="carousel-example-generic" class="carousel slide carousel-slider">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <!-- First slide -->
+                <div class="item carousel-item-four active">
+                    <div class="container">
+                        <div class="carousel-position-four text-center">
+                            <h2 class="margin-bottom-20 animate-delay carousel-title-v3 border-bottom-title text-uppercase" data-animation="animated fadeInDown">
+                                Магазин <br/><span class="color-red-v2">SUPERSHOP</span><br/> за дрехи
+                            </h2>
+                            <p class="carousel-subtitle-v2" data-animation="animated fadeInUp">
+                              Малка демонстрация на възможностите на<br/>
+                              "чистия" Django  в областта на електронната търговия.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second slide -->
+                <div class="item carousel-item-five">
+                    <div class="container">
+                        <div class="carousel-position-four text-center">
+                            <h2 class="animate-delay carousel-title-v4" data-animation="animated fadeInDown">
+                                Работеща
+                            </h2>
+                            <p class="carousel-subtitle-v2" data-animation="animated fadeInDown">
+                                функционалност
+                            </p>
+                            <p class="carousel-subtitle-v3 margin-bottom-30" data-animation="animated fadeInUp">
+                                Fully Responsive
+                            </p>
+                        </div>
+                        <img class="carousel-position-five animate-delay hidden-sm hidden-xs"
+                             src="{% static 'assets/pages/img/shop-slider/slide2/price.png' %}" a
+                             lt="Price" data-animation="animated zoomIn">
+                    </div>
+                </div>
+
+                <!-- Third slide -->
+                <div class="item carousel-item-six">
+                    <div class="container">
+                        <div class="carousel-position-four text-center">
+                            <span class="carousel-subtitle-v3 margin-bottom-15" data-animation="animated fadeInDown">
+                                Full Admin &amp; FrontКРАЙ
+                            </span>
+                            <p class="carousel-subtitle-v4" data-animation="animated fadeInDown">
+                                eCommerce UI
+                            </p>
+                            <p class="carousel-subtitle-v3" data-animation="animated fadeInDown">
+                                Is Ready For Your
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fourth slide -->
+                <div class="item carousel-item-seven">
+                   <div class="center-block">
+                        <div class="center-block-wrap">
+                            <div class="center-block-body">
+                                <h2 class="carousel-title-v1 margin-bottom-20" data-animation="animated fadeInDown">
+                                    Най-желаните неща <br/>
+                                    са тук
+                                </h2>
+                                <p>Пазарувайте сега!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control carousel-control-shop" href="#carousel-example-generic" role="button" data-slide="prev">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </a>
+            <a class="right carousel-control carousel-control-shop" href="#carousel-example-generic" role="button" data-slide="next">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+    <!-- КРАЙ SLIDER -->
+
+    <div class="main">
+      <div class="container">
+        {% if products %}
+        <!--НАЧАЛО ВСИЧКИ АРТИКУЛИ -->
+        <div class="row margin-bottom-40">
+          <div class="col-md-12 sale-product">
+            <h2>Ние предлагаме:</h2>
+            <div class="owl-carousel owl-carousel5">
+              {% for p in products %}
+              <div>
+                <div class="product-item">
+                  <div class="pi-img-wrapper">
+                    <img src="{{ p.product_image.url }}" class="img-responsive" alt="няма изображение">
+                    <div>
+                      <a href="{{ p.product_image.url }}" class="btn btn-default fancybox-button">Увеличи</a>
+                      <a href="#product-pop-up{{p.id}}" class="btn btn-default fancybox-fast-view">Детайли</a>
+                    </div>
+                  </div>
+                  <h3><a href="shop-item.html">{{p.name}}</a></h3>
+                  <div class="pi-price">{{p.price}} лв.</div>
+                  <a href="{% url 'add-to-cart' p.id  %}" class="btn btn-default add2cart">Купи</a>
+                  {% if p.for_sale %}
+                  <div class="sticker sticker-sale"></div>
+                  {% endif %}
+                  {% if p.is_new %}
+                  <div class="sticker sticker-new"></div>
+                  {% endif %}
                 </div>
               </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <!-- КРАЙ ВСИЧКИ АРТИКУЛИ -->
 
-              <div class="box-down">
-                <div class="h-bg">
-                  <div class="h-bg-inner"></div>
+        <!-- НАЧАЛО SIDEBAR И НОВИ -->
+        <div class="row margin-bottom-40 ">
+          <!-- НАЧАЛО SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-4">
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Дамско</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Мъжко</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Детско</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Аксесоари</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Спортни</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Разпродажба</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Нови</a></li>
+            </ul>
+          </div>
+          <!-- КРАЙ SIDEBAR -->
+
+          <!-- НАЧАЛО НОВИ -->
+          <div class="col-md-9 col-sm-8">
+            <h2>Нови</h2>
+            <div class="owl-carousel owl-carousel3">
+              {% for p in products_new %}
+              <div>
+                <div class="product-item">
+                  <div class="pi-img-wrapper">
+                      <img src="{{ p.product_image.url }}" class="img-responsive" alt="няма изображение">
+                      <div>
+                          <a href="{{ p.product_image.url }}" class="btn btn-default fancybox-button">Увеличи</a>
+                          <a href="#product-pop-up-new{{p.id}}" class="btn btn-default fancybox-fast-view">Детайли</a>
+                      </div>
+                  </div>
+                  <h3><a href="shop-item.html">{{p.name}}</a></h3>
+                  <div class="pi-price">{{p.price}} лв.</div>
+                  <a href="{% url 'add-to-cart' p.id  %}" class="btn btn-default add2cart">Купи</a>
+                  {% if p.for_sale %}
+                  <div class="sticker sticker-sale"></div>
+                  {% endif %}
+                  {% if p.is_new %}
+                  <div class="sticker sticker-new"></div>
+                  {% endif %}
                 </div>
-
-                <a class="cart" href="{% url 'add-to-cart' p.id  %}">
-                  <span class="price">${{p.price}}</span>
-                  <span class="add-to-cart">
-                    <span class="txt"><i class="fa fa-shopping-cart"></i> Add To Cart</span>
-                  </span>
-                </a>
               </div>
+              {% endfor %}
+            </div>
+          </div>
+          <!-- КРАЙ НОВИ -->
+        </div>
+        <!-- КРАЙ SIDEBAR И НОВИ -->
+
+        <!-- НАЧАЛО РАЗПРОДАЖБА И РЕКЛАМА -->
+        <div class="row margin-bottom-35 ">
+          <!-- НАЧАЛО TWO PRODUCTS -->
+          <div class="col-md-6 two-items-bottom-items">
+            <h2>Разпродажба</h2>
+            <div class="owl-carousel owl-carousel2">
+              {% for p in products_sale %}
+              <div>
+                <div class="product-item">
+                  <div class="pi-img-wrapper">
+                      <img src="{{ p.product_image.url }}" class="img-responsive" alt="няма изображение">
+                      <div>
+                          <a href="{{ p.product_image.url }}" class="btn btn-default fancybox-button">Увеличи</a>
+                          <a href="#product-pop-up-sale{{p.id}}" class="btn btn-default fancybox-fast-view">Детайли</a>
+                      </div>
+                  </div>
+                  <h3><a href="shop-item.html">{{p.name}}</a></h3>
+                  <div class="pi-price">{{p.price}} лв.</div>
+                  <a href="{% url 'add-to-cart' p.id  %}" class="btn btn-default add2cart">Купи</a>
+                  {% if p.for_sale %}
+                  <div class="sticker sticker-sale"></div>
+                  {% endif %}
+                  {% if p.is_new %}
+                  <div class="sticker sticker-new"></div>
+                  {% endif %}
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <!-- КРАЙ TWO PRODUCTS -->
+
+          <!-- НАЧАЛО PROMO -->
+          <div class="col-md-6 shop-index-carousel">
+            <div class="content-slider">
+              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1"></li>
+                  <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <img src="{% static 'assets/pages/img/index-sliders/slide1.jpg' %}" class="img-responsive" alt="Berry Lace Dress">
+                  </div>
+                  <div class="item">
+                    <img src="{% static 'assets/pages/img/index-sliders/slide2.jpg' %}" class="img-responsive" alt="Berry Lace Dress">
+                  </div>
+                  <div class="item">
+                    <img src="{% static 'assets/pages/img/index-sliders/slide3.jpg' %}" class="img-responsive" alt="Berry Lace Dress">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- КРАЙ PROMO -->
+
+        </div>
+        <!-- КРАЙ РАЗПРОДАЖБА И РЕКЛАМА -->
+        {% else %}
+        <h1 class="text-center"> Няма намерени продукти, отговарящи на вашето търсеене. </h1>
+        {% endif %}
+
+      </div>
+    </div>
+
+    <!-- НАЧАЛО МАРКИ -->
+    <div class="brands">
+      <div class="container">
+            <div class="owl-carousel owl-carousel6-brands">
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/canon.jpg' %}" alt="canon" title="canon"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/esprit.jpg' %}" alt="esprit" title="esprit"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/gap.jpg' %}" alt="gap" title="gap"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/next.jpg' %}" alt="next" title="next"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/puma.jpg' %}" alt="puma" title="puma"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/zara.jpg' %}" alt="zara" title="zara"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/canon.jpg' %}" alt="canon" title="canon"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/esprit.jpg' %}" alt="esprit" title="esprit"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/gap.jpg' %}" alt="gap" title="gap"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/next.jpg' %}" alt="next" title="next"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/puma.jpg' %}" alt="puma" title="puma"></a>
+              <a href="shop-product-list.html"><img src="{% static 'assets/pages/img/brands/zara.jpg' %}" alt="zara" title="zara"></a>
+            </div>
+        </div>
+    </div>
+    <!-- КРАЙ МАРКИ -->
+
+    <!-- НАЧАЛО ЕКСТРИ -->
+    <div class="steps-block steps-block-red">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 steps-block-col">
+            <i class="fa fa-truck"></i>
+            <div>
+              <h2>Безплатна доставка</h2>
+            </div>
+            <span>&nbsp;</span>
+          </div>
+          <div class="col-md-4 steps-block-col">
+            <i class="fa fa-gift"></i>
+            <div>
+              <h2>Подаръци</h2>
+              <em>всеки ден 3 щастливци получават подарък</em>
+            </div>
+            <span>&nbsp;</span>
+          </div>
+          <div class="col-md-4 steps-block-col">
+            <i class="fa fa-phone"></i>
+            <div>
+              <h2>077 505 8877</h2>
+              <em>24/7 - нашите косултанти са готови да Ви помогнат </em>
             </div>
           </div>
         </div>
       </div>
-      </div>
-<!-- card1 end -->
-{% if forloop.counter|divisibleby:"3" %}
     </div>
+    <!-- КРАЙ ЕКСТРИ -->
 
-    <div class="row">
+<!-- НАЧАЛО ДЕТАЙЛИ ПО СЕКЦИИ -->
+<!-- НАЧАЛО ВСИЧКИ -->
+              {% for p in products %}
+              <div id="product-pop-up{{p.id}}" style="display: none; width: 700px;">
+                      <div class="product-page product-pop-up">
+                        <div class="row">
+                          <div class="col-md-6 col-sm-6 col-xs-3">
+                            <div class="product-main-image">
+                              <img src="{{ p.product_image.url }}" alt=" " class="img-responsive">
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-sm-6 col-xs-9">
+                            <h2>{{p.name}}</h2>
+                            <div class="price-availability-block clearfix">
+                              <div class="price">
+                                <strong>{{p.price}}<span> лв.</span></strong>
+                              </div>
+                            </div>
+                            <div class="description">
+                              <p>{{p.description}}</p>
+                            </div>
+                            <div class="product-page-cart text-center margin-top-200" >
+                              <a href="{% url 'add-to-cart' p.id  %}" class="btn btn-primary" style="width:100px">Купи</a>
+                            </div>
+                          </div>
+                          {% if p.for_sale %}
+                          <div class="sticker sticker-sale"></div>
+                          {% endif %}
+                          {% if p.is_new %}
+                          <div class="sticker sticker-new"></div>
+                          {% endif %}
+                        </div>
+                      </div>
+              </div>
+              {% endfor %}
+<!-- КРАЙ ВСИЧКИ -->
 
-          <br><br><br><br><br>
-{% endif %}
-  {% endfor %}
-</div>
-<!-- products data end -->
-{%else%}
-<h3 style="text-align:center; color:#3E454C;">No Search Found</h3>
-{%endif%}
+<!-- НАЧАЛО НОВИ -->
+              {% for p in products_new %}
+              <div id="product-pop-up-new{{p.id}}" style="display: none; width: 700px;">
+                      <div class="product-page product-pop-up">
+                        <div class="row">
+                          <div class="col-md-6 col-sm-6 col-xs-3">
+                            <div class="product-main-image">
+                              <img src="{{ p.product_image.url }}" alt=" " class="img-responsive">
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-sm-6 col-xs-9">
+                            <h2>{{p.name}}</h2>
+                            <div class="price-availability-block clearfix">
+                              <div class="price">
+                                <strong>{{p.price}}<span> лв.</span></strong>
+                              </div>
+                            </div>
+                            <div class="description">
+                              <p>{{p.description}}</p>
+                            </div>
+                            <div class="product-page-cart text-center margin-top-200" >
+                              <a href="{% url 'add-to-cart' p.id  %}" class="btn btn-primary" style="width:100px">Купи</a>
+                            </div>
+                          </div>
 
-<script>
-    {%if messages %}
-    {%for message in messages%}
-    alert('{{message}}');
-    {%endfor%}
-    {%endif%}
-</script>
-<br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br>
+                          {% if p.for_sale %}
+                          <div class="sticker sticker-sale"></div>
+                          {% endif %}
+                          {% if p.is_new %}
+                          <div class="sticker sticker-new"></div>
+                          {% endif %}
+                        </div>
+                      </div>
+              </div>
+              {% endfor %}
+<!-- КРАЙ НОВИ -->
 
+<!-- НАЧАЛО РАЗПРОДАЖБА -->
+              {% for p in products_sale %}
+              <div id="product-pop-up-sale{{p.id}}" style="display: none; width: 700px;">
+                      <div class="product-page product-pop-up">
+                        <div class="row">
+                          <div class="col-md-6 col-sm-6 col-xs-3">
+                            <div class="product-main-image">
+                              <img src="{{ p.product_image.url }}" alt=" " class="img-responsive">
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-sm-6 col-xs-9">
+                            <h2>{{p.name}}</h2>
+                            <div class="price-availability-block clearfix">
+                              <div class="price">
+                                <strong>{{p.price}}<span> лв.</span></strong>
+                              </div>
+                            </div>
+                            <div class="description">
+                              <p>{{p.description}}</p>
+                            </div>
+                            <div class="product-page-cart text-center margin-top-200" >
+                              <a href="{% url 'add-to-cart' p.id  %}" class="btn btn-primary" style="width:100px">Купи</a>
+                            </div>
+                          </div>
 
-<!--
-developed By : sumit kumar
--->
+                          {% if p.for_sale %}
+                          <div class="sticker sticker-sale"></div>
+                          {% endif %}
+                          {% if p.is_new %}
+                          <div class="sticker sticker-new"></div>
+                          {% endif %}
+                        </div>
+                      </div>
+              </div>
+              {% endfor %}
+<!-- КРАЙ РАЗПРОДАЖБА -->
+<!-- КРАЙ ДЕТАЙЛИ ПО СЕКЦИИ -->
+{% endblock %}
 
-{% endblock content %}
+            {%  block payments %}
+            <ul class="list-unstyled list-inline pull-right">
+              <li><img src="{% static 'assets/corporate/img/payments/western-union.jpg' %}" alt="We accept Western Union" title="We accept Western Union"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/american-express.jpg' %}" alt="We accept American Express" title="We accept American Express"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/MasterCard.jpg' %}" alt="We accept MasterCard" title="We accept MasterCard"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/PayPal.jpg' %}" alt="We accept PayPal" title="We accept PayPal"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/visa.jpg' %}" alt="We accept Visa" title="We accept Visa"></li>
+            </ul>
+            {% endblock %}

@@ -50,40 +50,50 @@
 </head>
 <br><br><br><br><br><br>
 <!------ update page for doctor by admin(sumit)  ---------->
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" class="margin-bottom-200">
   {% csrf_token %}
   <div class="container register-form">
     <div class="form">
       <div class="note">
-        <p>ADD PRODUCTS</p>
+        <h1>Добавяне на артикул</h1>
       </div>
       <div class="form-content">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="">Product Name</label>
-              {% render_field productForm.name class="form-control" placeholder="Product Name" %}
+              <label for="name">Наименование</label>
+              {% render_field productForm.name id="name" class="form-control" placeholder="наименование на артикула" %}
             </div>
             <div class="form-group">
-              <label for="">Short Description</label>
-              {% render_field productForm.description class="form-control" placeholder="Description" %}
+              <label for="desc">Кратко описание</label>
+              {% render_field productForm.description id="desc" class="form-control" placeholder="описание на артикула" %}
+            </div>
+            <div class="form-group">
+              <label for="">Цена в лв.</label>
+              {% render_field productForm.price class="form-control" placeholder="99.00" %}
             </div>
 
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="">Product Price ($)</label>
-              {% render_field productForm.price class="form-control" placeholder="52" %}
+              <label for="">Нов</label>
+              {% render_field productForm.is_new class="form-control" %}
             </div>
             <div class="form-group">
-              <label for="">Product Image</label>
-              {% render_field productForm.product_image class="form-control" placeholder="product_image" %}
+              <label for="">Разпродажба</label>
+              {% render_field productForm.for_sale class="form-control" %}
+            </div>
+            <div class="form-group">
+              <label for="">Снимка</label>
+              {% render_field productForm.product_image class="form-control" placeholder="снимка" %}
             </div>
 
 
           </div>
         </div>
-        <button type="submit" class="btnSubmit">ADD</button>
+        <div class="text-center margin-top-60">
+         <button type="submit" class="btnSubmit">Запиши</button>
+        </div>
       </div>
     </div>
   </div>

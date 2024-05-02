@@ -1,4 +1,4 @@
-{% extends 'main/customer_base.html' %}
+{% extends 'main/homebase.html' %}
 {% load static %}
 
 {% block content %}
@@ -12,7 +12,9 @@
 .pl-ziro { padding-left: 0px; }
 </style>
 <br><br>
-<center><i>This is a FAKE PAYMENT. Just for demo purpose</i></center>
+<center>
+    <i>Това не е реално плащане. Само за демонсстрация!</i>
+</center>
 <br><br>
 <div class="container" style="text-align:center; padding-left:300px;">
     <div class="row">
@@ -20,20 +22,19 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Payment Details
+                        Данни за дебитна/кредитна карта
                     </h3>
                     <div class="checkbox pull-right">
                         <label>
                             <input type="checkbox" />
-                            Remember
+                            запомни
                         </label>
                     </div>
                 </div>
                 <div class="panel-body">
                     <form role="form" method="post">
                     <div class="form-group">
-                        <label for="cardNumber">
-                            CARD NUMBER</label>
+                        <label for="cardNumber">НОМЕР НА КАРТАТА</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="cardNumber" placeholder="xxxx xxxx xxxx xxxx"
                                 required autofocus />
@@ -41,30 +42,24 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-xs-12 col-md-12 text-left">
+                            ВАЛИДНА ДО:
+                        </div>
                         <div class="col-xs-4 col-md-4 pull-left">
                             <div class="form-group">
-                                <label for="cvCode">
-                                    MONTH</label>
-                                
-                                    <input type="text" class="form-control" id="expityMonth" placeholder="MM - 02" required />
-                               
+                                <label for="cvCode">МЕСЕЦ</label>
+                                <input type="text" class="form-control" id="expityMonth" placeholder="MM - 02" required />
                             </div>
                         </div>
-
                         <div class="col-xs-4 col-md-4">
                             <div class="form-group">
-                                <label for="expityMonth">
-                                    EXPIRY DATE</label>
-                               
-                                
-                               
-                                    <input type="text" class="form-control" id="expityYear" placeholder="YY - 22" required /></div>
-                            
+                                <label for="expityMonth">ГОДИНА</label>
+                                <input type="text" class="form-control" id="expityYear" placeholder="YY - 24" required />
+                            </div>
                         </div>
                         <div class="col-xs-4 col-md-4 pull-right">
                             <div class="form-group">
-                                <label for="cvCode">
-                                    CV CODE</label>
+                                <label for="cvCode">CV КОД</label>
                                 <input type="password" class="form-control" id="cvCode" placeholder="CV - xxx" required />
                             </div>
                         </div>
@@ -73,14 +68,22 @@
                 </div>
             </div>
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><span class="badge pull-right">{{total}}</span> Final Payment</a>
+                <li class="active"><a href="#"><span class="badge pull-right">{{total}} лв.</span> Сума за плащане</a>
                 </li>
             </ul>
             <br/>
-            <a href="/payment-success" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
+            <a href="/payment-success" class="btn btn-success btn-lg btn-block" role="button">ПЛАТИ</a>
         </div>
     </div>
 </div>
-
-
 {% endblock content %}
+
+            {% block payments %}
+            <ul class="list-unstyled list-inline pull-right">
+              <li><img src="{% static 'assets/corporate/img/payments/western-union.jpg' %}" alt="We accept Western Union" title="We accept Western Union"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/american-express.jpg' %}" alt="We accept American Express" title="We accept American Express"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/MasterCard.jpg' %}" alt="We accept MasterCard" title="We accept MasterCard"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/PayPal.jpg' %}" alt="We accept PayPal" title="We accept PayPal"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/visa.jpg' %}" alt="We accept Visa" title="We accept Visa"></li>
+            </ul>
+            {% endblock payments %}

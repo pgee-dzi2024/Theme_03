@@ -225,25 +225,28 @@ def search_view(request):
 
 # any one can add product to cart, no need of signin
 def add_to_cart_view(request,pk):
-    products=models.Product.objects.all()
+    products = models.Product.objects.all()
 
-    #for cart counter, fetching products ids added by customer from cookies
+    # for cart counter, fetching products ids added by customer from cookies
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
-        counter=product_ids.split('|')
-        product_count_in_cart=len(set(counter))
+        counter = product_ids.split('|')
+        product_count_in_cart = len(set(counter))
     else:
-        product_count_in_cart=1
+        product_count_in_cart = 1
+    context = {
+        'products': products,
+        'product_count_in_cart': product_count_in_cart,
+        }
+    response = render(request, 'ecom/index.html',context)
 
-    response = render(request, 'ecom/index.html',{'products':products,'product_count_in_cart':product_count_in_cart})
-
-    #adding product id to cookies
+    # добавяне на артикул към cookies
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
-        if product_ids=="":
-            product_ids=str(pk)
+        if product_ids == "":
+            product_ids = str(pk)
         else:
-            product_ids=product_ids+"|"+str(pk)
+            product_ids = product_ids+"|"+str(pk)
         response.set_cookie('product_ids', product_ids)
     else:
         response.set_cookie('product_ids', pk)

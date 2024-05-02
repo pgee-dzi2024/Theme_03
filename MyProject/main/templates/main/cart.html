@@ -1,117 +1,70 @@
 {% extends 'main/homebase.html' %}
 {% load static %}
 {% block content %}
+      <div class="container">
+        <div class="row margin-top-200">
+          <div class="col-md-12 col-sm-12 margin-bottom-30">
+            <h1>Количка</h1>
+            <div class="goods-page margin-bottom-200">
+              <div class="goods-data clearfix">
+                <div class="table-wrapper-responsive">
+                {% if product_count_in_cart > 0 %}
+                <table summary="Shopping cart">
+                  <tr>
+                    <th class="goods-page-description">Наименование</th>
+                    <th class="goods-page-image">Изображение</th>
+                    <th class="goods-page-price">Цена</th>
+                    <th class="goods-page-description">Описание</th>
+                    <th class="goods-page-description">--</th>
+                  </tr>
+                  {% for p in products %}
+                  <tr>
+                    <td class="goods-page-description">
+                      <h3>{{p.name}}</h3>
+                    </td>
+                    <td class="goods-page-image">
+                      <img src="{{ p.product_image.url }}" alt=" ">
+                    </td>
+                    <td class="goods-page-price">
+                      <strong>{{p.price}}<span> лв.</span></strong>
+                    </td>
+                    <td class="goods-page-description">
+                      <h3>{{p.description}}</h3>
+                    </td>
+                    <td class="del-goods-col">
+                      <a class="del-goods" href="{% url 'remove-from-cart' p.id  %}">&nbsp;</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </table>
+                {% else %}
+                  <p>Няма стоки в количката. </p>
+                {% endif %}
+                </div>
 
-
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<style media="screen">
-  .button {
-  display: inline-block;
-  border-radius: 4px;
-  background-color: #f4511e;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 28px;
-  padding: 20px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-}
-
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-.button2 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-.button2:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-</style>
-
-</head>
-<!--
-written By : sumit kumar
--->
-<br><br><br><br>
-
-<div class="container">
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h6 style="text-align:center;" class="panel-title">My Cart</h6>
-    </div>
-    <table class="table table-hover table-bordered" id="dev-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Image</th>
-          <th>Price</th>
-          <th>Description</th>
-          <th>Action</th>
-
-        </tr>
-      </thead>
-      {% for p in products %}
-  {% if p %}
-
-      <tr>
-        <td> {{p.name}}</td>
-        <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="50px" width="50px" /></td>
-        <td>$ {{p.price}}</td>
-        <td>{{p.description}}</td>
-
-        <td><a class="btn btn-danger btn-xs" href="{% url 'remove-from-cart' p.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
-
-      </tr>
-      {%else%}
-      <br><br><br>
-      <h1>no products</h1>
-      {% endif %}
-      {% endfor %}
-    </table>
-  </div>
-</div>
-<br><br><br>
-<div style="text-align: center;">
-  <button class="btn btn-danger btn-lg">Total ${{total}}</button>
-  <a href="/customer-address"><button class="btn btn-success btn-lg" ><span>Purchase </span></button></a>
-</div>
-
-
-<br><br><br><br><br>
-<!--
-developed By : sumit kumar
--->
+                <div class="shopping-total">
+                  <ul>
+                    <li class="shopping-total-price">
+                      <em>Сума общо</em>
+                      <strong class="price">{{total}}<span> лв.</span></strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a href="{% url 'home' %}" class="btn btn-default" >Продължи пазаруването <i class="fa fa-shopping-cart"></i></a>
+              <a href="/customer-address" class="btn btn-primary" >Завърши поръчката <i class="fa fa-check"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
 {% endblock content %}
+
+            {%  block payments %}
+            <ul class="list-unstyled list-inline pull-right">
+              <li><img src="{% static 'assets/corporate/img/payments/western-union.jpg' %}" alt="We accept Western Union" title="We accept Western Union"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/american-express.jpg' %}" alt="We accept American Express" title="We accept American Express"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/MasterCard.jpg' %}" alt="We accept MasterCard" title="We accept MasterCard"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/PayPal.jpg' %}" alt="We accept PayPal" title="We accept PayPal"></li>
+              <li><img src="{% static 'assets/corporate/img/payments/visa.jpg' %}" alt="We accept Visa" title="We accept Visa"></li>
+            </ul>
+            {% endblock %}

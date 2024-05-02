@@ -1,4 +1,4 @@
-{% extends 'main/customer_base.html' %}
+{% extends 'main/homebase.html' %}
 {% load static %}
 
 {% block content %}
@@ -39,15 +39,13 @@ a{
   text-decoration: none;
 }
 </style>
-<div class="success-page" style="top:auto;">
+<div class="success-page margin-top-200 margin-bottom-200" style="top:auto;">
    <img  src="http://share.ashiknesin.com/green-checkmark.png" class="center" alt="" />
-  <h2>Payment Successful !</h2>
-  <p>We are delighted to inform you that we received your payments.</p>
+  <h2>Успешно плащане!</h2>
+  <p>Плащането е извършено - преведената от Вас сума е постъпила по нашата сметка.</p>
   <br>
   <br>
-  <a style="text-decoration:none;" href="/my-order" class="btn btn-success btn-lg">View Orders/Track Orders</a>
-  <a style="text-decoration:none;" href="/customer-home">Continue Shopping</a>
+  <a style="text-decoration:none;" href="/my-order" class="btn btn-success btn-lg">Вижте/проследете Вашата поръчка</a>
+  <a style="text-decoration:none;" href="/customer-home">Продължете да пазарувате</a>
 </div>
-<br><br><br><br>
-<br><br><br><br>
 {% endblock content %}

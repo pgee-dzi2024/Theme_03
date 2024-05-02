@@ -21,10 +21,12 @@ class Customer(models.Model):
 
 
 class Product(models.Model):
-    name=models.CharField(max_length=40)
-    product_image= models.ImageField(upload_to='product_image', null=True, blank=True)
+    name = models.CharField(max_length=40)
+    product_image = models.ImageField(upload_to='product_image', null=True, blank=True)
     price = models.PositiveIntegerField()
-    description=models.CharField(max_length=40)
+    description = models.CharField(max_length=40)
+    is_new = models.BooleanField('Нов', null=True, default=True)
+    for_sale = models.BooleanField('Разпродажба', null=True, default=False)
 
     def __str__(self):
         return self.name
@@ -32,10 +34,10 @@ class Product(models.Model):
 
 class Orders(models.Model):
     STATUS = (
-        ('Pending', 'Pending'),
-        ('Order Confirmed', 'Order Confirmed'),
-        ('Out for Delivery', 'Out for Delivery'),
-        ('Delivered', 'Delivered'),
+        ('Нова', 'Нова'),
+        ('Приета', 'Приета'),
+        ('Обработва се', 'Обработва се'),
+        ('Изпратена', 'Изпратена'),
     )
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE, null=True)
     product = models.ForeignKey('Product', on_delete=models.CASCADE, null=True)
