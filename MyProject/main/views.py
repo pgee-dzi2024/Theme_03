@@ -33,7 +33,7 @@ def home_view(request):
     return render(request, 'main/index.html', context)
 
 
-# for showing login button for admin(by sumit)
+# показвне на логин бутона за админа
 def admin_click_view(request):
     print('admin_click_view')
     if request.user.is_authenticated:
@@ -67,12 +67,12 @@ def customer_signup_view(request):
     return render(request, 'main/customer_signup.html', context=mydict)
 
 
-# -----------for checking user is customer
+# проверка дали е клиент
 def is_customer(user):
     return user.groups.filter(name='CUSTOMER').exists()
 
 
-# ---------AFTER ENTERING CREDENTIALS WE CHECK WHETHER USERNAME AND PASSWORD IS OF ADMIN,CUSTOMER
+# след влизане в система - проверка какъв е - админ или клиент
 def after_login_view(request):
     print('after_login_view')
     if is_customer(request.user):
@@ -82,7 +82,7 @@ def after_login_view(request):
 
 
 # ---------------------------------------------------------------------------------
-# ------------------------ ADMIN RELATED VIEWS START ------------------------------
+# ------------------------ НАЧАЛО ИЗГЛЕДИ ЗА АДМИН  ------------------------------
 # ---------------------------------------------------------------------------------
 @login_required(login_url='admin_login')
 def admin_dashboard_view(request):
@@ -111,7 +111,7 @@ def admin_dashboard_view(request):
     return render(request, 'main/admin_dashboard.html', context=mydict)
 
 
-# admin view customer table
+# админ, таблица потребители
 @login_required(login_url='admin_login')
 def view_customer_view(request):
     print('view_customer_view')
